@@ -19,7 +19,7 @@ class _TodoPageState extends State<HomePage> {
 
   @override
   void initState() {
-    if (_myBox.get("TODOLIST" == null)) {
+    if (_myBox.get("TODOLIST") == null) {
       db.createInitialData();
     } else{
       db.loadData();
