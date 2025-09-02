@@ -17,12 +17,24 @@ class _TodoPageState extends State<HomePage> {
 
   toDoDatabase db = toDoDatabase();
 
+  @override
+  void initState() {
+    if (_myBox.get("TODOLIST" == null)) {
+      db.createInitialData();
+    } else{
+      db.loadData();
+    }
+
+    super.initState();
+  }
+
   final textController = TextEditingController();
 
   void checkBoxChanged (bool? value, int index) {
     setState(() {
       db.toDoList[index][1] = !db.toDoList[index][1];
     });
+    db.updateDatabase();
   }
 
 void saveNewTask () {
@@ -31,6 +43,7 @@ void saveNewTask () {
     textController.clear();
   });
   Navigator.of(context).pop();
+  db.updateDatabase();
 }
 
 void createNewTask() {
@@ -44,12 +57,14 @@ void createNewTask() {
       );
     },
   );
+  db.updateDatabase();
 }
 
 void deleteTask (int index) {
   setState(() {
     db.toDoList.removeAt(index);
   });
+  db.updateDatabase();
 }
 
   @override

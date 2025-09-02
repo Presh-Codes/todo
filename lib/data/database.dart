@@ -6,7 +6,9 @@ class toDoDatabase {
   List toDoList = [];
 
   void createInitialData () {
-
+    toDoList = [
+      ["Use Todo App", false]
+    ];
   }
 
   void loadData () {
@@ -14,6 +16,6 @@ class toDoDatabase {
   }
 
   void updateDatabase () {
-    
+    _myBox.put("TODOLIST", toDoList);
   }
 }
